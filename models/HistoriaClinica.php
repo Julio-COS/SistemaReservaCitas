@@ -13,6 +13,7 @@ class HistoriaClinica {
         $this->conn = $db;
     }
 
+    //BORRAR
     public function create() {
         $query = "INSERT INTO $this->table_name
                   SET id_paciente=:id_paciente, diagnostico=:diagnostico,
@@ -28,6 +29,7 @@ class HistoriaClinica {
         return $stmt->execute();
     }
 
+    //BORRAR
     public function readAll($pagina, $limit) {
         $offset = ($pagina - 1) * $limit;
         $query = "SELECT * FROM $this->table_name ORDER BY fecha_registro DESC LIMIT $limit OFFSET $offset";
@@ -73,6 +75,7 @@ class HistoriaClinica {
         return $stmt->execute();
     }
 
+    //BORRAR
     public function delete($id) {
         $query = "DELETE FROM $this->table_name WHERE id_historia = ?";
         $stmt = $this->conn->prepare($query);

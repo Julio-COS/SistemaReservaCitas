@@ -12,6 +12,7 @@ class HistoriaClinicaController {
         $this->historia = new HistoriaClinica($this->db);
     }
 
+    //BORRAR
     public function index() {
         $pagina = isset($_POST['pagina']) ? $_POST['pagina'] : 1;
         $limit = 15;
@@ -39,6 +40,7 @@ class HistoriaClinicaController {
         }
     }
 
+    //BORRAR
     public function delete($id) {
         if ($this->historia->delete($id)) {
             header('Location: index.php?action=index_historia_clinica');

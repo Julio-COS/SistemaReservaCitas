@@ -15,40 +15,40 @@ class Cita {
         $this->conn = $db;
     }
 
-    public function create() {
-        $query = "INSERT INTO $this->table_name
-                  SET id_paciente=:id_paciente, id_enfermera=:id_enfermera,
-                      fecha=:fecha, hora=:hora, motivo=:motivo, estado=:estado";
+    public function guardar() {
+        $query = "INSERT INTO " . $this->table_name . " 
+                  (id_paciente, id_enfermera, fecha, hora, motivo, estado) 
+                  VALUES (:id_paciente, :id_enfermera, :fecha, :hora, :motivo, :estado)";
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":id_paciente", $this->id_paciente);
-        $stmt->bindParam(":id_enfermera", $this->id_enfermera);
-        $stmt->bindParam(":fecha", $this->fecha);
-        $stmt->bindParam(":hora", $this->hora);
-        $stmt->bindParam(":motivo", $this->motivo);
-        $stmt->bindParam(":estado", $this->estado);
+        $stmt->bindParam(':id_paciente', $this->id_paciente);
+        $stmt->bindParam(':id_enfermera', $this->id_enfermera);
+        $stmt->bindParam(':fecha', $this->fecha);
+        $stmt->bindParam(':hora', $this->hora);
+        $stmt->bindParam(':motivo', $this->motivo);
+        $stmt->bindParam(':estado', $this->estado);
 
-        return $stmt->execute();
+        $stmt->execute();
     }
 
-    public function readAll($pagina, $limit) {
-        $offset = ($pagina - 1) * $limit;
-        $query = "SELECT * FROM $this->table_name ORDER BY fecha DESC LIMIT $limit OFFSET $offset";
+    public function getAll() {
+        $query = "SELECT * FROM " . $this->table_name;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $citas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $countQuery = "SELECT COUNT(*) as total FROM $this->table_name";
-        $countStmt = $this->conn->prepare($countQuery);
-        $countStmt->execute();
-        $total = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $eventos = [];
 
-        return [
-            'data' => $data,
-            'total' => $total,
-            'total_pages' => ceil($total / $limit)
-        ];
+        foreach ($citas as $cita) {
+            $eventos[] = [
+                'title' => 'Paciente ID: ' . $cita['id_paciente'],
+                'start' => $cita['fecha'] . 'T' . $cita['hora'],
+                'description' => $cita['motivo']
+            ];
+        }
+
+        return $eventos;
     }
 
     public function findById($id) {
@@ -59,31 +59,16 @@ class Cita {
     }
 
     public function update() {
-        $query = "UPDATE $this->table_name SET
-                  id_paciente=:id_paciente,
-                  id_enfermera=:id_enfermera,
-                  fecha=:fecha,
-                  hora=:hora,
-                  motivo=:motivo,
-                  estado=:estado
-                  WHERE id_cita=:id_cita";
-
+        $query = "UPDATE citas SET id_paciente = ?, id_enfermera = ?, fecha = ?, hora = ?, motivo = ? WHERE id_cita = ?";
         $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(":id_paciente", $this->id_paciente);
-        $stmt->bindParam(":id_enfermera", $this->id_enfermera);
-        $stmt->bindParam(":fecha", $this->fecha);
-        $stmt->bindParam(":hora", $this->hora);
-        $stmt->bindParam(":motivo", $this->motivo);
-        $stmt->bindParam(":estado", $this->estado);
-        $stmt->bindParam(":id_cita", $this->id_cita);
-
-        return $stmt->execute();
+        $stmt->bind_param("iisssi", $this->id_paciente, $this->id_enfermera, $this->fecha, $this->hora, $this->motivo, $this->id_cita);
+        $stmt->execute();
     }
 
-    public function delete($id) {
-        $query = "DELETE FROM $this->table_name WHERE id_cita = ?";
+    public function delete() {
+        $query = "DELETE FROM citas WHERE id_cita = ?";
         $stmt = $this->conn->prepare($query);
-        return $stmt->execute([$id]);
+        $stmt->bind_param("i", $this->id_cita);
+        $stmt->execute();
     }
 }

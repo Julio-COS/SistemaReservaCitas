@@ -5,6 +5,9 @@ class Enfermera {
 
     public $id_enfermera;
     public $nombre;
+    public $apellido_p;
+    public $apellido_m;
+    public $dni;
     public $especialidad;
     public $telefono;
     public $email;
@@ -16,10 +19,20 @@ class Enfermera {
     // CREATE
     public function create() {
         $query = "INSERT INTO $this->table_name
-                  SET nombre=:nombre, especialidad=:especialidad, telefono=:telefono, email=:email";
+                  SET nombre = :nombre,
+                      apellido_p = :apellido_p,
+                      apellido_m = :apellido_m,
+                      dni = :dni,
+                      especialidad = :especialidad,
+                      telefono = :telefono,
+                      email = :email";
+
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":nombre", $this->nombre);
+        $stmt->bindParam(":apellido_p", $this->apellido_p);
+        $stmt->bindParam(":apellido_m", $this->apellido_m);
+        $stmt->bindParam(":dni", $this->dni);
         $stmt->bindParam(":especialidad", $this->especialidad);
         $stmt->bindParam(":telefono", $this->telefono);
         $stmt->bindParam(":email", $this->email);
@@ -28,12 +41,12 @@ class Enfermera {
     }
 
     // READ ONE
-    public function readOne() {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id_enfermera = ? LIMIT 0,1";
+    public function readOne($id) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE id_enfermera = :id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $this->id_enfermera);
+        $stmt->bindParam(":id", $id);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // READ ALL
@@ -62,20 +75,27 @@ class Enfermera {
     // UPDATE
     public function update() {
         $query = "UPDATE $this->table_name
-                  SET nombre=:nombre, especialidad=:especialidad, telefono=:telefono, email=:email
-                  WHERE id_enfermera = :id";
+                  SET nombre = :nombre,
+                      apellido_p = :apellido_p,
+                      apellido_m = :apellido_m,
+                      dni = :dni,
+                      especialidad = :especialidad,
+                      telefono = :telefono,
+                      email = :email
+                  WHERE id_enfermera = :id_enfermera";
+
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":nombre", $this->nombre);
+        $stmt->bindParam(":apellido_p", $this->apellido_p);
+        $stmt->bindParam(":apellido_m", $this->apellido_m);
+        $stmt->bindParam(":dni", $this->dni);
         $stmt->bindParam(":especialidad", $this->especialidad);
         $stmt->bindParam(":telefono", $this->telefono);
         $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":id", $this->id_enfermera);
+        $stmt->bindParam(":id_enfermera", $this->id_enfermera);
 
-        if ($stmt->execute()) {
-            return true;
-        }
-        return false;
+        return $stmt->execute();
     }
 
     // DELETE

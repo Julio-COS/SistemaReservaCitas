@@ -18,10 +18,8 @@ if (!isset($_SESSION['username'])) {
             <li class="nav-item has-children">
                 <span class="toggle-btn">+</span> Paciente
                 <ul class="nested">
-                    <li class="nav-item"><a href="index.php?action=crear_paciente" class="nav-link text-white">Crear</a></li>
-                    <li class="nav-item"><a href="index.php?action=listar_pacientes" class="nav-link text-white">Ver todos</a></li>
-                    <li class="nav-item"><a href="index.php?action=editar_paciente" class="nav-link text-white">Editar</a></li>
-                    <li class="nav-item"><a href="index.php?action=eliminar_paciente" class="nav-link text-white">Eliminar</a></li>
+                    <li class="nav-item"><a href="index.php?action=paciente_create" class="nav-link text-white">Crear</a></li>
+                    <li class="nav-item"><a href="index.php?action=paciente_index" class="nav-link text-white">Ver todos</a></li>
                 </ul>
             </li>
 
@@ -29,10 +27,8 @@ if (!isset($_SESSION['username'])) {
             <li class="nav-item has-children">
                 <span class="toggle-btn">+</span> Enfermera
                 <ul class="nested">
-                    <li class="nav-item"><a href="index.php?action=crear_enfermera" class="nav-link text-white">Crear</a></li>
-                    <li class="nav-item"><a href="index.php?action=listar_enfermeras" class="nav-link text-white">Ver todas</a></li>
-                    <li class="nav-item"><a href="index.php?action=editar_enfermera" class="nav-link text-white">Editar</a></li>
-                    <li class="nav-item"><a href="index.php?action=eliminar_enfermera" class="nav-link text-white">Eliminar</a></li>
+                    <li class="nav-item"><a href="index.php?action=enfermera_create" class="nav-link text-white">Crear</a></li>
+                    <li class="nav-item"><a href="index.php?action=enfermera_index" class="nav-link text-white">Ver todas</a></li>
                 </ul>
             </li>
 
@@ -40,11 +36,12 @@ if (!isset($_SESSION['username'])) {
             <li class="nav-item has-children">
                 <span class="toggle-btn">+</span> Historia Clínica
                 <ul class="nested">
-                    <li class="nav-item"><a href="index.php?action=crear_historia" class="nav-link text-white">Crear</a></li>
                     <li class="nav-item"><a href="index.php?action=listar_historias" class="nav-link text-white">Ver todas</a></li>
-                    <li class="nav-item"><a href="index.php?action=editar_historia" class="nav-link text-white">Editar</a></li>
-                    <li class="nav-item"><a href="index.php?action=eliminar_historia" class="nav-link text-white">Eliminar</a></li>
                 </ul>
+            </li>
+            <!-- CITAS -->
+            <li class="nav-item has-children">
+                <a href="index.php?action=cita_index" class="nav-link text-white">Citas</a>
             </li>
 
             <li class="nav-item">

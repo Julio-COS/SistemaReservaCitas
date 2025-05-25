@@ -13,14 +13,36 @@ class CitaController {
     }
 
     public function index() {
-        $pagina = isset($_POST['pagina']) ? $_POST['pagina'] : 1;
-        $limit = 15;
-        $citas = $this->cita->readAll($pagina, $limit);
-        require 'views/cita/index.php';
+        include 'views/cita/index.php';
+    }
+
+    public function getAll() {
+        header('Content-Type: application/json');
+        echo json_encode($this->cita->getAll());
     }
 
     public function create() {
-        require 'views/cita/create.php';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->cita->id_paciente = $_POST['id_paciente'];
+            $this->cita->id_enfermera = $_POST['id_enfermera'];
+            $this->cita->fecha = $_POST['fecha'];
+            $this->cita->hora = $_POST['hora'];
+            $this->cita->motivo = $_POST['motivo'];
+
+            if ($this->cita->guardar()) {
+                echo json_encode(["status" => "success"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Error al guardar la cita."]);
+            }
+        }
+    }
+
+    public function delete($id) {
+        if ($this->cita->delete($id)) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error']);
+        }
     }
 
     public function update($id) {
@@ -31,20 +53,9 @@ class CitaController {
             $this->cita->fecha = $_POST['fecha'];
             $this->cita->hora = $_POST['hora'];
             $this->cita->motivo = $_POST['motivo'];
-
-            if ($this->cita->update()) {
-                header('Location: index.php?action=index_cita');
-            } else {
-                echo "Error al actualizar la cita.";
-            }
-        }
-    }
-
-    public function delete($id) {
-        if ($this->cita->delete($id)) {
-            header('Location: index.php?action=index_cita');
-        } else {
-            echo "Error al eliminar la cita.";
+            
+            $this->cita->update();
+            echo json_encode(["status" => "updated"]);
         }
     }
 }

@@ -13,8 +13,21 @@
 │   └── logout.php
 │
 ├── views/
-│   ├── login_form.php
-│   └── cpanel.php           
+│   ├── paciente/
+│   │   ├── index.php
+│   │   ├── create.php
+│   │   ├── edit.php
+│   │   └── show.php
+│   ├── enfermera/
+│   │   ├── index.php
+│   │   ├── create.php
+│   │   ├── edit.php
+│   │   └── show.php
+│   └── historia_clinica/
+│   │   ├── index.php
+│   │   ├── create.php
+│   │   ├── edit.php
+│   │   └── show.php       
 │
 ├── public/
 │   ├── index.php            
