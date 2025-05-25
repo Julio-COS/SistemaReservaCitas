@@ -1,0 +1,86 @@
+/* PANEL */
+body {
+    overflow-x: hidden;
+}
+
+#sidebar {
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#sidebar.collapsed {
+    margin-left: -250px;
+}
+
+#content {
+    transition: all 0.3s;
+}
+
+#sidebarToggle {
+    cursor: pointer;
+}
+
+
+/* ESCONDER PANEL */
+
+.dropdown-menu {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-item {
+    padding: 10px;
+    color: white;
+    background-color: #343a40;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #495057;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-item.dropdown:focus-within .dropdown-menu {
+    display: block;
+}
+
+/* ANIDACIÓN */
+
+.tree-menu {
+    list-style: none;
+    padding-left: 0;
+    font-size: 16px;
+}
+
+.tree-menu .nav-item {
+    padding: 6px 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tree-menu .nav-item:hover {
+    background-color: #495057;
+    border-radius: 4px;
+}
+
+.tree-menu .nested {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+}
+
+.tree-menu .nested.show {
+    display: block;
+}
+
+.toggle-btn {
+    display: inline-block;
+    width: 16px;
+    margin-right: 5px;
+}

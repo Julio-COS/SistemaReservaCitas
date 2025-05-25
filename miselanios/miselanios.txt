@@ -1,0 +1,23 @@
+/enfermeria
+│
+├── config/
+│   └── database.php         
+│
+├── classes/
+│   ├── Enfermera.php
+│   ├── Cita.php
+│   ├── HistoriaClinica.php
+│
+├── auth/
+│   ├── login.php            
+│   └── logout.php
+│
+├── views/
+│   ├── login_form.php
+│   └── cpanel.php           
+│
+├── public/
+│   ├── index.php            
+│   └── assets/
+│
+└── .htaccess (si usas Apache)
