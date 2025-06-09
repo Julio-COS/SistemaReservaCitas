@@ -1,11 +1,11 @@
-
 <?php include('./partials/head.php'); ?>
 <body>
-<?php include('./partials/nav.php'); ?>
-
-<div id="content" class="flex-grow-1 p-3">
-    <span id="sidebarToggle" class="btn btn-secondary mb-3">&#9776; Menú</span>
-    <div class="container">
+<!-- <div> incluido en el nav-->
+    <?php include('./partials/nav.php'); ?>
+    
+    <!-- Main content -->
+    <div id="content" class="flex-grow-1 p-3">
+        <span id="sidebarToggle" class="btn btn-secondary mb-3">&#9776; Menú</span>
         <div id="calendar"></div>
 
         <!-- Modal para agendar/editar cita -->
@@ -45,6 +45,9 @@
         </div>
     </div>
 </div>
+
+
+</body>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -118,4 +121,5 @@
     });
   });
 </script>
-</body>
+<script src="./assets/js/sidebar.js"></script>
+</html>

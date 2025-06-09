@@ -3,9 +3,6 @@
 <head>
     <meta charset='utf-8' />
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/resource-timegrid/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/resource-common/index.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/premium-common/index.global.min.js"></script>
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

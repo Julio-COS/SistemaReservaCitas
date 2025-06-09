@@ -5,80 +5,43 @@ class HistoriaClinica {
 
     public $id_historia;
     public $id_paciente;
+    public $fecha_registro;
+    public $descripcion;
     public $diagnostico;
     public $tratamiento;
-    public $fecha_registro;
+    public $observaciones;
+    
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    //BORRAR
-    public function create() {
-        $query = "INSERT INTO $this->table_name
-                  SET id_paciente=:id_paciente, diagnostico=:diagnostico,
-                      tratamiento=:tratamiento, fecha_registro=:fecha_registro";
-
+    public function getByPaciente($idPaciente) {
+        $query = "SELECT * FROM $this->table_name WHERE id_paciente = :id LIMIT 1";
         $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(":id_paciente", $this->id_paciente);
-        $stmt->bindParam(":diagnostico", $this->diagnostico);
-        $stmt->bindParam(":tratamiento", $this->tratamiento);
-        $stmt->bindParam(":fecha_registro", $this->fecha_registro);
-
-        return $stmt->execute();
-    }
-
-    //BORRAR
-    public function readAll($pagina, $limit) {
-        $offset = ($pagina - 1) * $limit;
-        $query = "SELECT * FROM $this->table_name ORDER BY fecha_registro DESC LIMIT $limit OFFSET $offset";
-        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $idPaciente);
         $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $countQuery = "SELECT COUNT(*) as total FROM $this->table_name";
-        $countStmt = $this->conn->prepare($countQuery);
-        $countStmt->execute();
-        $total = $countStmt->fetch(PDO::FETCH_ASSOC)['total'];
-
-        return [
-            'data' => $data,
-            'total' => $total,
-            'total_pages' => ceil($total / $limit)
-        ];
-    }
-
-    public function findById($id) {
-        $query = "SELECT * FROM $this->table_name WHERE id_historia = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function update() {
         $query = "UPDATE $this->table_name SET
-                  id_paciente=:id_paciente,
-                  diagnostico=:diagnostico,
-                  tratamiento=:tratamiento,
-                  fecha_registro=:fecha_registro
-                  WHERE id_historia=:id_historia";
+                    descripcion = :descripcion,
+                    diagnostico = :diagnostico,
+                    tratamiento = :tratamiento,
+                    observaciones = :observaciones
+                  WHERE id_historia = :id_historia";
 
         $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(":id_paciente", $this->id_paciente);
-        $stmt->bindParam(":diagnostico", $this->diagnostico);
-        $stmt->bindParam(":tratamiento", $this->tratamiento);
-        $stmt->bindParam(":fecha_registro", $this->fecha_registro);
-        $stmt->bindParam(":id_historia", $this->id_historia);
+        $stmt->bindParam(':descripcion', $this->descripcion);
+        $stmt->bindParam(':diagnostico', $this->diagnostico);
+        $stmt->bindParam(':tratamiento', $this->tratamiento);
+        $stmt->bindParam(':observaciones', $this->observaciones);
+        $stmt->bindParam(':id_historia', $this->id_historia);
 
         return $stmt->execute();
     }
 
-    //BORRAR
-    public function delete($id) {
-        $query = "DELETE FROM $this->table_name WHERE id_historia = ?";
-        $stmt = $this->conn->prepare($query);
-        return $stmt->execute([$id]);
-    }
+
 }

@@ -8,7 +8,6 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 ?>
-
 <div class="d-flex">
     <!-- Sidebar -->
     <div id="sidebar" class="bg-dark text-white p-3" style="width: 250px;">
@@ -32,13 +31,6 @@ if (!isset($_SESSION['username'])) {
                 </ul>
             </li>
 
-            <!-- HISTORIA CLÍNICA -->
-            <li class="nav-item has-children">
-                <span class="toggle-btn">+</span> Historia Clínica
-                <ul class="nested">
-                    <li class="nav-item"><a href="index.php?action=listar_historias" class="nav-link text-white">Ver todas</a></li>
-                </ul>
-            </li>
             <!-- CITAS -->
             <li class="nav-item has-children">
                 <a href="index.php?action=cita_index" class="nav-link text-white">Citas</a>
@@ -50,4 +42,3 @@ if (!isset($_SESSION['username'])) {
         </ul>
     </div>
     
-

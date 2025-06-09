@@ -44,6 +44,7 @@
                                 <a href="index.php?action=paciente_update&id=<?= $paciente['id_paciente'] ?>">Editar</a>
                                 |
                                 <a href="index.php?action=paciente_delete&id=<?= $paciente['id_paciente'] ?>" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                                <a href="index.php?action=historia_view&id=<?= $paciente['id_paciente'] ?>">Ver Historia Clínica</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -89,11 +89,21 @@ switch ($action) {
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
         $pacienteController->delete($id);
         break;
+
+    // HISTORIA CLINICA
+    case 'historia_view':
+        $historiaController->view();
+    break;
+
+    case 'historia_update':
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+        $historiaController->update($id);
+        break;
     
 
     default:
         if (isset($_SESSION['user_id'])) {
-            header("Location: index.php?action=enfermera_index"); //cambiar donde horarios
+            header("Location: index.php?action=enfermera_index"); 
         } else {
             echo "Página no encontrada";
         }
