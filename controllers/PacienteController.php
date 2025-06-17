@@ -72,4 +72,17 @@ class PacienteController {
             echo "Error al eliminar el paciente.";
         }
     }
+    public function list() {
+        $pacientes = $this->paciente->list();
+
+        $resultado = array_map(function($p) {
+            return [
+                'id' => $p['id_paciente'],
+                'nombre' => $p['nombre'] . ' ' . $p['apellido_p'] . ' ' . $p['apellido_m']
+            ];
+        }, $pacientes);
+
+        header('Content-Type: application/json');
+        echo json_encode($resultado);
+    }
 }

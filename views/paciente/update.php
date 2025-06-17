@@ -43,7 +43,8 @@
                 <input type="text" name="direccion" value="<?= $paciente['direccion'] ?>" class="form-control" required><br>
 
                 <br>
-                <button type="submit">Actualizar</button>
+                <button type="submit" class="btn btn-primary" >Actualizar</button>
+                <a href="?action=paciente_index" class="btn btn-secondary" style="right: 0;">Regresar</a>
             </form>
 
         </div>

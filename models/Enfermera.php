@@ -99,15 +99,19 @@ class Enfermera {
     }
 
     // DELETE
-    public function delete() {
+    public function delete($id) {
         $query = "DELETE FROM $this->table_name WHERE id_enfermera = :id";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(":id", $this->id_enfermera);
+        $stmt->bindParam(":id", $id);
 
-        if ($stmt->execute()) {
-            return true;
-        }
-        return false;
+        return $stmt->execute();
+    }
+    
+    public function list() {
+        $sql = "SELECT id_enfermera, nombre, apellido_p, apellido_m FROM $this->table_name";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

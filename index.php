@@ -73,6 +73,9 @@ switch ($action) {
         $enfermeraController->delete($id);
         break;
 
+    case 'enfermera_list':
+        $enfermeraController->list();
+        break;
 
     // paciente
     case 'paciente_index':
@@ -88,6 +91,9 @@ switch ($action) {
     case 'paciente_delete':
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
         $pacienteController->delete($id);
+        break;
+    case 'paciente_list':
+        $pacienteController->list();
         break;
 
     // HISTORIA CLINICA

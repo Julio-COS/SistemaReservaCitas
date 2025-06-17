@@ -34,7 +34,8 @@
                 <input type="email" name="email" class="form-control"><br>
 
                 <br>
-                <button type="submit">Registrar</button>
+                <button type="submit" class="btn btn-primary" >Registrar</button>
+                <a href="?action=enfermera_index" class="btn btn-secondary" style="right: 0;">Regresar</a>
             </form>
 
 

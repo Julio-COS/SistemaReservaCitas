@@ -19,6 +19,21 @@ class EnfermeraController {
         require 'views/enfermera/index.php';
     }
 
+    public function list() {
+        $enfermeras = $this->enfermera->list();
+
+        // Formatea los datos como JSON con id y nombre completo
+        $resultado = array_map(function($e) {
+            return [
+                'id' => $e['id_enfermera'],
+                'nombre' => $e['nombre'] . ' ' . $e['apellido_p'] . ' ' . $e['apellido_m']
+            ];
+        }, $enfermeras);
+
+        header('Content-Type: application/json');
+        echo json_encode($resultado);
+    }
+
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->enfermera->nombre = $_POST['nombre'];

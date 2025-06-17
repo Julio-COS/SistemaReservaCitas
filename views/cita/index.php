@@ -23,12 +23,20 @@
                             <input type="hidden" id="hora_fin" name="hora_fin">
 
                             <div class="mb-3">
-                                <label>Paciente ID:</label>
-                                <input type="number" name="id_paciente" class="form-control" required>
+                              <label for="selectPaciente">Paciente:</label>
+                              <select id="selectPaciente" name="id_paciente" class="form-control" required>
+                                <option value="">Seleccione un paciente</option>
+                                <!-- opciones dinámicas desde PHP o JS -->
+                              </select>
                             </div>
+
+                            <!-- Enfermera -->
                             <div class="mb-3">
-                                <label>Enfermera ID:</label>
-                                <input type="number" name="id_enfermera" class="form-control" required>
+                              <label for="selectEnfermera">Enfermera:</label>
+                              <select id="selectEnfermera" name="id_enfermera" class="form-control" required>
+                                <option value="">Seleccione una enfermera</option>
+                                <!-- opciones dinámicas desde PHP o JS -->
+                              </select>
                             </div>
                             <div class="mb-3">
                                 <label>Motivo:</label>
@@ -49,6 +57,28 @@
 
 </body>
 <script>
+  $(document).ready(function () {
+    $.getJSON('index.php?action=enfermera_list', function (data) {
+      const select = $('#selectEnfermera');
+      select.empty();
+      select.append('<option value="">Seleccione una enfermera</option>');
+      data.forEach(function (item) {
+        select.append(`<option value="${item.id}">${item.nombre}</option>`);
+      });
+    });
+  });
+
+    $(document).ready(function () {
+    $.getJSON('index.php?action=paciente_list', function (data) {
+      const select = $('#selectPaciente');
+      select.empty();
+      select.append('<option value="">Seleccione un paciente</option>');
+      data.forEach(function (item) {
+        select.append(`<option value="${item.id}">${item.nombre}</option>`);
+      });
+    });
+  });
+
   document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -71,8 +101,8 @@
         $('#fecha').val(info.event.startStr.split("T")[0]);
         $('#hora').val(info.event.startStr.split("T")[1].substring(0,5));
         $('#hora_fin').val(info.event.endStr.split("T")[1].substring(0,5));
-        $('input[name="id_paciente"]').val(cita.id_paciente);
-        $('input[name="id_enfermera"]').val(cita.id_enfermera);
+        $('select[name="id_paciente"]').val(cita.id_paciente);
+        $('select[name="id_enfermera"]').val(cita.id_enfermera);
         $('textarea[name="motivo"]').val(cita.motivo);
         $('#formCita').attr('data-id', info.event.id);
         $('#modalCita').modal('show');
@@ -120,6 +150,8 @@
       }
     });
   });
+
+
 </script>
 <script src="./assets/js/sidebar.js"></script>
 </html>

@@ -43,7 +43,8 @@
                 <input type="text" name="direccion" class="form-control" required><br>
 
                 <br>
-                <button type="submit">Guardar</button>
+                <button type="submit" class="btn btn-primary" >Guardar</button>
+                <a href="?action=paciente_index" class="btn btn-secondary" style="right: 0;">Regresar</a>
             </form>
 
         </div>

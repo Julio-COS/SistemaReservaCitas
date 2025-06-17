@@ -1,0 +1,15 @@
+14:59:38.834 INFO [LoggingOptions.configureLogEncoding] - Using the system default encoding
+14:59:38.840 INFO [OpenTelemetryTracer.createTracer] - Using OpenTelemetry for tracing
+14:59:39.466 INFO [NodeOptions.getSessionFactories] - Detected 12 available processors
+14:59:39.469 INFO [NodeOptions.discoverDrivers] - Looking for existing drivers on the PATH.
+14:59:39.469 INFO [NodeOptions.discoverDrivers] - Add '--selenium-manager true' to the startup command to setup drivers automatically.
+14:59:40.119 WARN [SeleniumManager.lambda$runCommand$1] - Unable to discover proper IEDriverServer version in offline mode
+14:59:40.176 INFO [NodeOptions.report] - Adding Edge for {"browserName": "MicrosoftEdge","platformName": "Windows 10"} 12 times
+14:59:40.177 INFO [NodeOptions.report] - Adding Chrome for {"browserName": "chrome","platformName": "Windows 10"} 12 times
+14:59:40.179 INFO [NodeOptions.report] - Adding Internet Explorer for {"browserName": "internet explorer","platformName": "Windows 10"} 1 times
+14:59:40.181 INFO [NodeOptions.report] - Adding Firefox for {"browserName": "firefox","platformName": "Windows 10"} 12 times
+14:59:40.309 INFO [Node.<init>] - Binding additional locator mechanisms: relative
+14:59:40.330 INFO [GridModel.setAvailability] - Switching Node ab0d9764-fc48-435b-a3fe-c62ff38e0b72 (uri: http://192.168.56.1:4444) from DOWN to UP
+14:59:40.330 INFO [LocalDistributor.add] - Added node ab0d9764-fc48-435b-a3fe-c62ff38e0b72 at http://192.168.56.1:4444. Health check every 120s
+14:59:40.521 INFO [Standalone.execute] - Started Selenium Standalone 4.33.0 (revision 2c6aaad03a): http://192.168.56.1:4444
+^C

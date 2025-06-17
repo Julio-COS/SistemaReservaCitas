@@ -101,4 +101,11 @@ class Paciente {
         $stmt->bindParam(":id", $id);
         return $stmt->execute();
     }
+
+    public function list() {
+        $sql = "SELECT id_paciente, nombre, apellido_p, apellido_m FROM $this->table_name";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
