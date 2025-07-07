@@ -9,12 +9,14 @@ require_once 'controllers/EnfermeraController.php';
 require_once 'controllers/CitaController.php';
 require_once 'controllers/HistoriaClinicaController.php';
 require_once 'controllers/PacienteController.php';
+require_once 'controllers/HomeController.php';
 
 $authController = new AuthController();
 $enfermeraController = new EnfermeraController();
 $citaController = new CitaController();
 $historiaController = new HistoriaClinicaController();
 $pacienteController = new PacienteController();
+$homeController = new HomeController();
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
@@ -99,17 +101,20 @@ switch ($action) {
     // HISTORIA CLINICA
     case 'historia_view':
         $historiaController->view();
-    break;
+        break;
 
     case 'historia_update':
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
         $historiaController->update($id);
         break;
     
+    case 'home':
+        $homeController->index();
+        break;  
 
     default:
         if (isset($_SESSION['user_id'])) {
-            header("Location: index.php?action=enfermera_index"); 
+            header("Location: index.php?action=home"); 
         } else {
             echo "Página no encontrada";
         }

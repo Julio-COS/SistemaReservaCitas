@@ -13,6 +13,7 @@ if (!isset($_SESSION['username'])) {
     <div id="sidebar" class="bg-dark text-white p-3" style="width: 250px;">
         <h4 class="mb-4">Bienvenido <?php echo $_SESSION['username']; ?></h4>
         <ul class="nav flex-column tree-menu">
+            <li class="nav-item"><a href="index.php?action=home" class="nav-link text-white">Home</a></li>
             <!-- PACIENTE -->
             <li class="nav-item has-children">
                 <span class="toggle-btn">+</span> Paciente

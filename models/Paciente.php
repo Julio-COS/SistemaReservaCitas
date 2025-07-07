@@ -43,7 +43,7 @@ class Paciente {
     // READ ALL (paginado)
     public function readAll($pagina, $limit) {
         $offset = ($pagina - 1) * $limit;
-        $query = "SELECT * FROM $this->table_name LIMIT $limit OFFSET $offset";
+        $query = "SELECT * FROM $this->table_name ORDER BY id_paciente DESC LIMIT $limit OFFSET $offset ";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
